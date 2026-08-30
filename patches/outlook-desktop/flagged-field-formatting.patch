@@ -1,0 +1,7 @@
+--- a/flagged-field-formatting.patch+++ b/flagged-field-formatting.patch@@ -31,6 +31,7 @@         "sender_name": getattr(item, "SenderName", "unknown"),
+         "received_time": str(item.ReceivedTime),
+         "unread": bool(item.UnRead),
++        "flagged": bool(getattr(item, "IsMarkedAsTask", False)),
+         "has_attachments": bool(item.Attachments.Count > 0),
+         "attachment_count": item.Attachments.Count,
+     }

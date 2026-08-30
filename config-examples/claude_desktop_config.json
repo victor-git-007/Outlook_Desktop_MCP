@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "outlook-calendar": {
+      "command": "outlook-calendar-mcp",
+      "args": [],
+      "env": {}
+    },
+    "outlook-desktop": {
+      "command": "C:\\Users\\victo\\AppData\\Local\\mcp-venvs\\outlook-desktop\\Scripts\\python.exe",
+      "args": ["-m", "outlook_desktop_mcp"]
+    }
+  }
+}

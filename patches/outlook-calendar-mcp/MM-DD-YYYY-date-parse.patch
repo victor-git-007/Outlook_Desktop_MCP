@@ -1,0 +1,48 @@
+--- a/MM-DD-YYYY-date-parse.patch+++ b/MM-DD-YYYY-date-parse.patch@@ -91,21 +91,20 @@ ' Converts a date string in MM/DD/YYYY format to a Date object
+ Function ParseDate(dateStr)
+     On Error Resume Next
+-    
+-    If IsDate(dateStr) Then
+-        ParseDate = CDate(dateStr)
+-    Else
+-        ' Try to parse MM/DD/YYYY format
+-        Dim parts, month, day, year
+-        parts = Split(dateStr, "/")
+-        
+-        If UBound(parts) = 2 Then
+-            month = parts(0)
+-            day = parts(1)
+-            year = parts(2)
+-            
+-            If IsNumeric(month) And IsNumeric(day) And IsNumeric(year) Then
+-                ParseDate = DateSerial(year, month, day)
++
++    ' Force MM/DD/YYYY parsing regardless of system locale (fixes en-AE dd/MM/yyyy conflict).
++    ' Reject any non-numeric or out-of-range input instead of falling back to locale-dependent CDate.
++    Dim parts, month, day, year
++    parts = Split(dateStr, "/")
++
++    If UBound(parts) = 2 Then
++        month = parts(0)
++        day = parts(1)
++        year = parts(2)
++
++        If IsNumeric(month) And IsNumeric(day) And IsNumeric(year) Then
++            If CInt(month) >= 1 And CInt(month) <= 12 And CInt(day) >= 1 And CInt(day) <= 31 Then
++                ParseDate = DateSerial(CInt(year), CInt(month), CInt(day))
+             Else
+                 WScript.Echo ERROR_PREFIX & "Invalid date format. Expected MM/DD/YYYY: " & dateStr
+                 WScript.Quit 1
+@@ -114,8 +113,11 @@             WScript.Echo ERROR_PREFIX & "Invalid date format. Expected MM/DD/YYYY: " & dateStr
+             WScript.Quit 1
+         End If
+-    End If
+-    
++    Else
++        WScript.Echo ERROR_PREFIX & "Invalid date format. Expected MM/DD/YYYY: " & dateStr
++        WScript.Quit 1
++    End If
++
+     If Err.Number <> 0 Then
+         WScript.Echo ERROR_PREFIX & "Failed to parse date: " & dateStr & " - " & Err.Description
+         WScript.Quit 1

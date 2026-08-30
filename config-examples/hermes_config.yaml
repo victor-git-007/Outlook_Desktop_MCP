@@ -1,0 +1,17 @@
+# Outlook Desktop MCP — Hermes Agent snippet
+# Add these two entries under the existing "mcp_servers:" mapping in:
+#   %LOCALAPPDATA%\Hermes\config.yaml
+# (setup.ps1 writes them for you)
+mcp_servers:
+  outlook-calendar:
+    transport: stdio
+    command: outlook-calendar-mcp
+    args: []
+    tools: all
+    enabled: true
+  outlook-desktop:
+    transport: stdio
+    command: "C:\\Users\\victo\\AppData\\Local\\mcp-venvs\\outlook-desktop\\Scripts\\python.exe"
+    args: ["-m", "outlook_desktop_mcp"]
+    tools: all
+    enabled: true

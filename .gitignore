@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node / npm
+node_modules/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Local configs (do not commit real user configs)
+*.disrup-backup-*
