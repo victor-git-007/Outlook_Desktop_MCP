@@ -76,7 +76,7 @@ python -c "import patch; patch.fromfile('patches/outlook-desktop/flagged-only-py
 
 ## Usage notes
 
-- Always pass the `account` parameter (e.g. `victor@disrup-tech.com`). The
+- Always pass the `account` parameter (e.g. `info@disrup-tech.com`). The
   default store can resolve to an empty profile and return nothing.
 - Red follow-up flags are returned by `list_emails(flagged_only=True, account="...")`.
 
